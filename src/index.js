@@ -92,11 +92,8 @@ setInterval(() => {
 	const background = negativeCounter === 2
 		? '#212121'
 		: backgroundColors[Math.floor(Math.random() * backgroundColors.length)]
-	const shadow = negativeCounter === 2
-		? '#fff'
-		: backgroundColors[Math.floor(Math.random() * backgroundColors.length)]
 	body.style.setProperty('--background', background)
-	body.style.setProperty('--shadow', `0 0 100px ${shadow} inset`)
+	body.style.setProperty('--shadow', `0 0 400px ${background} inset`)
 	if (negativeCounter === 2) {
 		body.classList.add('egg')
 	} else {

@@ -1,0 +1,131 @@
+@import "fonts";
+@import "variables";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  transition: background .1s ease-out;
+
+  --background: #b0bec5;
+  --shadow: #b0bec5;
+  background: var(--background);
+  box-shadow: var(--shadow);
+
+  overflow: hidden;
+
+  width: 100vw;
+  height: 100vh;
+
+  font-family: "nk57";
+  text-transform: uppercase;
+
+  &.egg:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url(../images/back.png);
+
+    opacity: 0.15;
+  }
+}
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+
+  position: relative;
+
+  --parallax: 0;
+  transform: var(--parallax);
+
+  font-size: 15rem;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  justify-content: center;
+
+  --background: #b0bec5;
+  --color: black;
+  --shadow: black 0px 0px 25px;
+
+  div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    color: var(--color);
+    text-shadow: var(--shadow);
+
+    transform-origin: 50% 50%;
+
+    transform: translate(-50%, -50%);
+
+    &.effect-transition {
+      transition: transform 1s cubic-bezier(.04,.79,.36,.99);
+    }
+    &.effect {
+      transform: translate(-50%, -50%) scale(2.5);
+    }
+  }
+}
+
+$prime: #FF6E48;
+$second: #0C1016;
+
+
+.glitch {
+  color: white;
+  font-size: 10rem;
+  width: 40rem;
+  position: relative;
+
+  &::after {
+    content: attr(data-trick);
+    position: absolute;
+    top: 0;
+    left: 0.5rem;
+    color: var(--color);
+    background-color: var(--background);
+    overflow: hidden;
+    text-shadow: -0.5rem 0 #fff;
+    clip: rect(0, 90rem, 0, 0);
+    animation: noise 2s infinite linear alternate-reverse;
+  }
+
+  &::before {
+    content: attr(data-trick);
+    position: absolute;
+    top: 0;
+    left: -1rem;
+    color: var(--color);
+    background-color: var(--background);
+    overflow: hidden;
+    text-shadow: 0.3rem 0 #fff;
+    clip: rect(0, 90rem, 0, 0);
+    animation: noise 4s infinite linear alternate-reverse;
+  }
+}
+
+@keyframes noise {
+  $steps: 25;
+  @for $i from 0 through $steps {
+    #{ percentage($i * (1/$steps))} {
+      clip: rect(random(12)+rem, 99.99rem, random(12)+rem, 0);
+    }
+  }
+}
